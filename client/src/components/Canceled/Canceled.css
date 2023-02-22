@@ -1,0 +1,50 @@
+.tasklist{
+    width: 80%;
+    margin: auto;
+    margin-top: 1rem;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+.canceled h3{
+    color: rgb(223, 238, 183);
+    text-align: center;
+}
+.canceled input{
+    width: 40%;
+    margin-left: 20%;
+    padding: 0.4rem;
+    border: 1px solid floralwhite;
+    outline: none;
+    
+}
+.canceled button{
+    padding: 0.5rem;
+    cursor: pointer;
+    background: darkred;
+    color: white;
+    border: none;
+}
+.canceled button:hover{
+    color: rgb(221, 199, 199);
+}
+.canceleditemlist{
+    border-radius: 1rem;
+    box-shadow: 1px 1px 2px 1px gray;
+    padding: 1rem;
+    background: whitesmoke;
+}
+.delandedit span{
+    cursor: pointer;
+    font-size: 2rem;
+}
+.delandedit span:first-child{
+    color: green;
+}
+.delandedit span:last-child{
+    color: red;
+}
+.delandedit{
+  display: flex;
+  justify-content: space-between;
+}
