@@ -12,7 +12,7 @@ const SendOTP = () => {
       ErrorToast("valid email Address Required!");
     } else {
       recoverVerifyEmailRequest(email).then((result) => {
-        if (result) {
+        if (result===true) {
           navigate("/verifyOTP");
         }
       });

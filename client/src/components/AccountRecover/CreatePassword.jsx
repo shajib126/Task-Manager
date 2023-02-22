@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { recoverResetPassRequest } from "../../APIrequest/APIrequest";
 import { ErrorToast, isEmpty } from "../../helper/FormHelper";
-import { getEmail, getOTP } from "../../helper/SessionHelper";
+import { getEmail, getOTP, removeSessions } from "../../helper/SessionHelper";
 
 const CreatePassword = () => {
   let passwordRef,
@@ -21,6 +21,7 @@ const CreatePassword = () => {
     } else {
       recoverResetPassRequest(getEmail(), getOTP(), Password).then((result) => {
         if (result === true) {
+          // removeSessions()
           navigate("/Login");
         }
       });
@@ -36,7 +37,7 @@ const CreatePassword = () => {
           readOnly={true}
           value={getEmail()}
           placeholder="User Email"
-          className="form-control animated fadeInUp"
+         
           type="email"
         />
         <br />
@@ -44,7 +45,7 @@ const CreatePassword = () => {
         <input
           ref={(input) => (passwordRef = input)}
           placeholder="New Password"
-          className="form-control animated fadeInUp"
+         
           type="password"
         />
         <br />

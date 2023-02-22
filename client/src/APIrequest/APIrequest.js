@@ -6,6 +6,7 @@ import { ShowLoader,HideLoader } from '../redux/stateSlice/settingSlice'
 import { setSummery } from '../redux/stateSlice/summeryslice';
 import { SetCanceled, SetCompletedTask, SetNewTask, SetProgressTask } from '../redux/stateSlice/taskSlice';
 import store from '../redux/store'
+import { UnAuthorizedRequest } from './UnAuthorizeRequest';
 
 const axiosHeader ={headers:{"token":getToken()}}
 
@@ -39,6 +40,7 @@ export function registrationRequest(email,firstname,lastname,mobile,password,pho
     }).catch((err)=>{
         store.dispatch(HideLoader())
         ErrorToast(`Something Went Wrong ${err}` )
+        UnAuthorizedRequest(err)
         return false
     })
 }
@@ -59,6 +61,7 @@ export function LoginRequest(email,password){
     }).catch((err)=>{
         ErrorToast("Something Went Wrong" + err.message)
         store.dispatch(HideLoader())
+        UnAuthorizedRequest(err)
         return false
 
     })
@@ -79,6 +82,9 @@ export function createNewTask(title,description,status){
         }
     }).catch((err)=>{
         ErrorToast(`${err.message}`)
+        store.dispatch(HideLoader())
+        UnAuthorizedRequest(err)
+        return false
     })
 }
 
@@ -104,6 +110,8 @@ export function taskListByStatus(status){
     }).catch((err)=>{
         ErrorToast(`${err.message}`)
         store.dispatch(HideLoader())
+        UnAuthorizedRequest(err)
+        return false
     })
 }
 
@@ -122,6 +130,7 @@ export function updateStatusRequest(id,status){
     }).catch((err)=>{
         ErrorToast(`${err.message}`)
         store.dispatch(HideLoader())
+        UnAuthorizedRequest(err)
         return false
     })
 }
@@ -141,6 +150,7 @@ export function deleteRequest(id){
     }).catch((err)=>{
         ErrorToast(`${err.message}`)
         store.dispatch(HideLoader())
+        UnAuthorizedRequest(err)
         return false
     })
 }
@@ -157,6 +167,10 @@ export function summeryRequest(){
         }
     }).catch((err)=>{
         ErrorToast(`${err.message}`)
+        store.dispatch(HideLoader())
+        UnAuthorizedRequest(err)
+        return false
+        
     })
 }
 
@@ -173,6 +187,8 @@ export function getProfileDetails(){
     }).catch((err)=>{
         ErrorToast(`${err.message}`)
         store.dispatch(HideLoader())
+        UnAuthorizedRequest(err)
+        
     })
 }
 
@@ -194,6 +210,7 @@ export function profileUpdateRequest(email,firstname,lastname,mobile,password,ph
     }).catch((err)=>{
         ErrorToast(`${err.message}`)
         store.dispatch(HideLoader())
+        UnAuthorizedRequest(err)
         return false
     })
 }
@@ -205,8 +222,9 @@ export function recoverVerifyEmailRequest(email){
     return axios.get(url).then((res)=>{
         store.dispatch(HideLoader())
         if(res.status ===200){
-            if(!res.data.success){
+            if(res.data.success === false){
                 ErrorToast("User not found")
+                return false
             }else{
                 setEmail(email)
                 SuccessToast("6 digit verification code has been sent to your email")
@@ -219,6 +237,7 @@ export function recoverVerifyEmailRequest(email){
     }).catch((err)=>{
         ErrorToast(`${err.message}`)
         store.dispatch(HideLoader())
+        UnAuthorizedRequest(err)
         return false
     })
 }
@@ -227,8 +246,9 @@ export function recoverVerifyOTPRequest(email,OTP){
     store.dispatch(ShowLoader())
     const url = `/api/v1/user/recoverVerifyOTP/${email}/${OTP}`
     return axios.get(url).then((res)=>{
+        store.dispatch(HideLoader())
         if(res.status === 200){
-            if(!res.data.success){
+            if(res.data.success === false){
                 ErrorToast(res.data.data)
                 return false
             }else{
@@ -238,10 +258,13 @@ export function recoverVerifyOTPRequest(email,OTP){
             }
         }else{
             ErrorToast("Something went Wrong!")
+            return false
         }
     }).catch((err)=>{
         ErrorToast(`${err.message}`)
         store.dispatch(HideLoader())
+        UnAuthorizedRequest(err)
+        return false
     })
 }
 
@@ -254,12 +277,12 @@ export function recoverResetPassRequest(email,OTP,password){
         store.dispatch(HideLoader())
         if(res.status===200){
 
-            if(!res.data.success){
+            if(res.data.success === false){
                 ErrorToast(res.data.data);
                 return false;
             }
             else{
-                setOTP(OTP)
+                setOTP(OTP) //
                 SuccessToast("NEW PASSWORD CREATED");
                 return true;
             }
@@ -271,6 +294,7 @@ export function recoverResetPassRequest(email,OTP,password){
     }).catch((err)=>{
         ErrorToast("Something Went Wrong")
         store.dispatch(HideLoader())
+        UnAuthorizedRequest(err)
         return false;
     });
 }

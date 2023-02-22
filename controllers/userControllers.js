@@ -97,7 +97,7 @@ exports.profileDetails=(req,res)=>{
 
 exports.recoverVerifyEmial = async(req,res)=>{
   const email = req.params.email;
-  const OPTCode = Math.floor(100000 + Math.random() * 900000)
+  let OTPCode = Math.floor(100000 + Math.random() * 900000)
   try {
     const userCount =(await User.aggregate([
       {
@@ -105,10 +105,18 @@ exports.recoverVerifyEmial = async(req,res)=>{
       },
       {$count:"total"}
     ]))
-    if(userCount){
-      const createOTP = await OTPModel.create({email,otp:OPTCode})
-      const sendEmail = await sendEmailUtility(email,"Your PIN code is = " + OPTCode, "Task manager pin verification")
-      res.status(200).json({success:true,data:sendEmail})
+    if(userCount.length > 0){
+      const isExistEmail = await OTPModel.findOne({email})
+     if(isExistEmail){
+      await OTPModel.updateOne({email},{$set:{otp:OTPCode,status:0}})
+     }else{
+        await OTPModel.create({email,otp:OTPCode})
+     }
+     let sendEmail = await sendEmailUtility(email, "Your  PIN code is = " + OTPCode)
+     res.status(200).json({
+      success:false,
+      data:sendEmail
+     })
     }else{
       res.status(400).json({success:false,data:'No User found'})
     }
@@ -130,7 +138,7 @@ exports.recoverVerifyOTP = async(req,res)=>{
     const OTPCount = await OTPModel.aggregate([{
       $match:{email,otp:OTPCode,status:status}
     },{$count:"total"}])
-    if(OTPCount){
+    if(OTPCount.length > 0){
       const OTPUpdate = await OTPModel.updateOne({email,otp:OTPCode,status},{
         email,
         otp:OTPCode,
@@ -138,7 +146,7 @@ exports.recoverVerifyOTP = async(req,res)=>{
       })
       res.status(200).json({success:true,data:OTPUpdate})
     }else{
-      res.status(400).json({success:false,data:"Invalid OTP Code"})
+      res.status(500).json({success:false,message:" OTP already Used"})
     }
   } catch (error) {
     res.status(500).json({

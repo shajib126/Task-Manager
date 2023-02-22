@@ -11,8 +11,11 @@ export function deleteTask(id){
         cancelButtonColor: '#d33',
         confirmButtonText: 'Yes, delete it!'
     }).then((result)=>{
-        return deleteRequest(id).then((delResult)=>{
-            return delResult
-        })
+        if(result.isConfirmed){
+            return deleteRequest(id).then((delResult)=>{
+                return delResult
+            })
+        }
+        
     })
 }
