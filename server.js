@@ -3,6 +3,7 @@ const dotenv = require('dotenv')
 const mongoose = require('mongoose')
 const morgan = require('morgan')
 const cors = require('cors')
+const path = require('path')
 const helmet = require('helmet')
 const cookieParser = require('cookie-parser')
 const userRoute = require('./routers/UserRoutes')
@@ -22,10 +23,18 @@ app.use(helmet())
 app.use('/api/v1/user',userRoute)
 app.use('/api/v1/task',taskRoute)
 
-app.use('*',(_,res)=>{
-    res.send('<h1>Route Not Found</h1>')
-})
 
+
+//
+app.use(express.static(path.join(__dirname,"./client/build")))
+app.get("*",function(_,res){
+    res.sendFile(
+        path.join(__dirname,"./client/build/index.html"),
+        function(err){
+            res.status(500).send(err)
+        }
+    )
+})
 //
 mongoose.connect(process.env.MONGO_URI).then(()=>{
     console.log(`DB connected ${mongoose.connection.host}`)

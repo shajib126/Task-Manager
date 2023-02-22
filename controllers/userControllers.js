@@ -38,7 +38,7 @@ exports.registerUser = (req, res) => {
 
 exports.loginUser = (req, res) => {
  const {email,password} = req.body
-
+console.log(email,password);
  User.aggregate([
   {$match:{email,password}},
   {$project:{_id:0,email:1,firstname:1,lastname:1,mobile:1,photo:1}}
@@ -154,13 +154,13 @@ exports.recoverResetPassword = async(req,res)=>{
   let OTPCode = req.body.OTP;
   const pass = req.body.passowrd
   const statusUpdate = 1
-  const hashedPass = await bcrypt.hash(pass,10)
+  
 
   try {
     const OTPCount = await OTPModel.aggregate([{$match: {email: email, otp: OTPCode, status: statusUpdate}}, {$count: "total"}])
     if(OTPCount){
       const passUpdate = await OTPModel.updateOne({email},{
-        password:hashedPass
+        password:pass
       })
       res.status(200).json({success:true,data:passUpdate})
     }else{
