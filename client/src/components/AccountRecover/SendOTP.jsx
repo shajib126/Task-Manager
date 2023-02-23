@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { recoverVerifyEmailRequest } from "../../APIrequest/APIrequest";
 import { ErrorToast, isEmail } from "../../helper/FormHelper";
+import './SendOtp.css'
 
 const SendOTP = () => {
   let emailRef = useRef();
@@ -20,7 +21,7 @@ const SendOTP = () => {
   };
   return (
     <>
-      <div className="card-body">
+      <div className="sendOtp">
         <h4>EMAIL ADDRESS</h4>
         <br />
         <label>Your email address</label>

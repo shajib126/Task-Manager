@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { recoverResetPassRequest } from "../../APIrequest/APIrequest";
 import { ErrorToast, isEmpty } from "../../helper/FormHelper";
 import { getEmail, getOTP, removeSessions } from "../../helper/SessionHelper";
+import './CreatePassword.css'
 
 const CreatePassword = () => {
   let passwordRef,
@@ -28,8 +29,8 @@ const CreatePassword = () => {
     }
   };
   return (
-    <div>
-      <div className="card-body">
+    <div className="craate-password">
+     
         <h4>SET NEW PASSWORD</h4>
         <br />
         <label>Your email address</label>
@@ -53,17 +54,17 @@ const CreatePassword = () => {
         <input
           ref={(input) => (confirmPasswordRef = input)}
           placeholder="Confirm Password"
-          className="form-control animated fadeInUp"
+         
           type="password"
         />
         <br />
         <button
           onClick={resetPass}
-          className="btn w-100 animated fadeInUp float-end btn-primary"
+         
         >
           Next
         </button>
-      </div>
+     
     </div>
   );
 };

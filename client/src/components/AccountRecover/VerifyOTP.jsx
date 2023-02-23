@@ -4,7 +4,7 @@ import { recoverVerifyOTPRequest } from "../../APIrequest/APIrequest";
 import { ErrorToast } from "../../helper/FormHelper";
 import { getEmail } from "../../helper/SessionHelper";
 import ReactCodeInput from "react-code-input";
-
+import './VerifyOtp.css'
 const VerifyOTP = () => {
   let [OTP, SetOTP] = useState("");
   const navigate = useNavigate();
@@ -39,7 +39,7 @@ const VerifyOTP = () => {
 
   return (
     <div>
-      <div className="card-body">
+      <div className="verifyOtp">
         <h4>OTP VERIFICATION </h4>
         <p>A 6 Digit verification code has been sent to your email address. </p>
         <ReactCodeInput

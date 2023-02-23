@@ -2,17 +2,15 @@ const nodemailer = require('nodemailer')
 
 const sendEmailUtility = async(emailTo,emailText,emailSubject)=>{
     console.log(emailTo,emailText,emailSubject);
-    let transporter = nodemailer.createTransport({
-        host:'smtp.ethereal.email',
-        PORT:587,
-        secure:false,
+    let config ={
+        service:"gmail",
         auth:{
-            user:'adriel.white4@ethereal.email',
-            pass:'5cDe3aDS9UEASAnSDk'
-        },tls:{
-            rejectUnauthorized:false
+            user:process.env.MAIL_HOST,
+            pass:process.env.MAIL_PASS
         }
-    })
+    }
+    
+    let transporter = nodemailer.createTransport(config)
 
     let mailOptions ={
         from:'Task Manager <shajib126@gmail.com>',
