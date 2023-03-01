@@ -28,9 +28,17 @@ const Login = () => {
     <>
       <div className="login">
         <h4>SIGN IN</h4>
+        <div className="input">
+        <label htmlFor="">Email</label>
         <input ref={(input)=>emailRef=input} type="email" placeholder='email' />
+        </div>
+        <div className="input">
+          <label>Password</label>
         <input ref={(input)=>passRef=input} type="password" placeholder='******' />
+        </div>
         <button onClick={submitLogin}>Login</button>
+        
+        <br />
         <span className='signUp_forgotPassword'>
           <Link to='/register'>Sign Up</Link>
           <Link to='/SendOTP'>Forget Password</Link>

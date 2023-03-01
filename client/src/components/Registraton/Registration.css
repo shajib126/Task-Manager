@@ -1,41 +1,52 @@
 .registration{
-    width: 40%;
+    width: 35%;
     margin:4rem auto;
-    
+    background-color: white;
+    padding: 1rem;
+    border-radius: 1rem;
+}
+.registration h4{
+    margin:0 3rem;
+    color: rebeccapurple;
+    text-align: center;
+}
+.reg_input{
+    width: 80%;
+    margin:2rem auto;
     display: flex;
     flex-direction: column;
-    gap: 2rem;
-    text-align: center;
-    padding: 1rem;
-    box-shadow: 1px 1px 2px 1px black;
-    border-radius: 1rem;
-    background-color: rgba(0, 0, 0, 0.815);
-    color: rgb(190, 231, 142);
+    gap: 0.2rem;
 }
 .registration input{
-    width: 80%;
-    margin: auto;
+    width: 100%;
     padding: 0.5rem;
-    border: none;
-    outline: none;
-    border-radius: 0.4rem;
 
 }
+
 .registration button{
-    width: 30%;
-    margin: auto;
-    border: 1px solid green;
+    width: 40%;
+    margin:0 3rem;
     padding: 0.7rem;
-    background: transparent;
+    border-radius: 0.3rem;
+    border: none;
+    background-color: green;
     color: white;
     cursor: pointer;
-    transition: all 0.5s ease;
 }
-.registration button:hover{
-    
-   background-color: green;
-    transform: scale(1.1);
+.alreadyLogged{
+    display: flex;
+    margin-left: 11rem;
+    font-size: 0.7rem;
+    margin-top: 2rem;
 }
-.registration a{
-    color: rgb(100, 157, 206);
+
+@media only screen and (max-width:950px) {
+    .registration{
+        width: 60%;
+    }
+}
+@media only screen and (max-width:650px) {
+    .registration{
+        width: 80%;
+    }
 }

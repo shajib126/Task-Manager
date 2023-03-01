@@ -43,13 +43,31 @@ const Ragistration = () => {
     <>
     <div className="registration">
       <h4>Sign Up</h4>
+      <hr style={{fontSize:'1px',width:"100px"}} />
+      <div className="reg_input">
+        <label>Email</label>
       <input ref={(input)=>emailRef=input} type="email" placeholder='email' />
+      </div>
+      <div className="reg_input">
+        <label htmlFor="">First Name</label>
       <input ref={(input)=>firstNameRef=input} type="text" placeholder='John' />
+      </div>
+      <div className="reg_input">
+        <label htmlFor="">Last Name</label>
       <input ref={(input)=>lastNameRef=input} type="text" placeholder='Doe' />
+      </div>
+      <div className="reg_input">
+        <label>Mobile Number</label>
       <input ref={(input)=>mobileRef=input} type="text" placeholder='01xxxxxx' />
+      </div>
+      <div className="reg_input">
+        <label>Password</label>
       <input ref={(input)=>passwordRef=input} type="password" placeholder='******' />
-      <button onClick={submitRegistration}>Sign Up</button>
-      <span className='alreadyLogged'>Already Logged In - <Link to='/login'>Sign In</Link></span>
+      </div>
+      <div className="reg_inpuit">
+       <button onClick={submitRegistration}>Sign Up</button>
+      </div>
+      <span className='alreadyLogged'>Already Registered? - <Link to='/login'>Sign In</Link></span>
     </div>
     </>
   )

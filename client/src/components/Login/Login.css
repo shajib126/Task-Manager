@@ -1,48 +1,57 @@
 .login{
-    border: 1px solid gray;
-    width: 40%;
-    margin:10rem auto;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    gap: 3rem;
-    padding: 1rem;
-    border-radius: 1rem;
-    background-color: rgba(0, 0, 0, 0.801);
+   width: 20%;
+   background-color: white;
+   padding: 1rem;
+   margin:8rem auto;
+   border-radius: 1rem;
+   
+   
 }
 .login h4{
-    color: white;
-    font-weight: bold;
-    letter-spacing: 0.5em;
-}
-.login input{
-    background-color: white;
-    border: 1px solid green;
-    outline: none;
-    padding: 1rem;
     text-align: center;
+}
+.input{
     width: 80%;
-    margin: auto;
-    border-radius: 1rem;
-}
-.login button{
-    width: 50%;
-    padding: 0.5rem;
-    margin: auto;
-    border: none;
-    border-radius: 1rem;
-    font-size: 1.5rem;
-    cursor: pointer;
-    background: rgb(155, 196, 102);
-    color: white;
-}
-.signUp_forgotPassword{
+    margin:2rem auto;
     display: flex;
-    gap: 1rem;
-    width: 40%;
+    flex-direction: column;
+    gap: 0.2rem;
     
 }
-.signUp_forgotPassword a{
-    color: rgb(231, 62, 62);
-    text-decoration: none;
+.login input{
+    width: 100%;
+    padding: 0.5rem;
+}
+.login button{
+    width:40%;
+    padding: 0.2rem;
+    cursor: pointer;
+    border: none;
+    background-color: green;
+    color: white;
+    font-size: 1.3rem;
+    border-radius: 0.3rem;
+    margin-bottom: 1rem;
+    margin-left: 2rem;
+   
+}
+ .login a{
+   text-decoration: none;
+   
+    display: flex;
+   margin-left: 70%; 
+   font-size: 0.7rem;
+   margin-bottom: 1rem;
+}
+
+@media only screen and (max-width:1200px) {
+    .login{
+        width: 40%;
+    }
+}
+
+@media only screen and (max-width:600px) {
+    .login{
+        width: 80%;
+    }
 }
